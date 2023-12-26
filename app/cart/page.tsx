@@ -1,8 +1,14 @@
 import React from 'react'
+import Container from '../components/Container';
+import CardClient from './CartClient';
 
 const Cart = () => {
   return (
-    <div>Cart</div>
+    <div className='pt-8'>
+      <Container>
+        <CardClient />
+      </Container>
+    </div>
   )
 }
 
