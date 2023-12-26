@@ -59,7 +59,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({product}) => {
   useEffect (() => {
     setIsProductInCart(false);
     if(cartProducts){
-      const existingIndex = cartProducts.findIndex((item:any) => item.id === product.id);
+     const existingIndex = cartProducts.findIndex((item:any) => item.id === product.id);
       if(existingIndex > -1){
         setIsProductInCart(true);
       }
