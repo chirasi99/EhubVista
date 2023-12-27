@@ -6,10 +6,14 @@ import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
 import Button from '../components/products/Button';
 import Link from 'next/link';
 import { AiOutlineGoogle } from 'react-icons/ai';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
 
 
 
 const LoginFrom = () => {
+        const router = useRouter();
         const [isLoading, setIsLoading] = React.useState(false);
         const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
                 defaultValues: {
@@ -19,8 +23,20 @@ const LoginFrom = () => {
         });
         const onSubmit: SubmitHandler<FieldValues> = async (data) => {
                 setIsLoading(true);
-                console.log(data);
-        }
+                signIn('credentials', {...data, redirect:false}).then((callback)=>{
+                        setIsLoading(false)
+                        if(callback?.ok){
+                                router.push('/cart')
+                                router.refresh()
+                                toast.success('Logged in')
+                                
+                        }
+                        if(callback?.error){
+                                toast.error(callback.error)
+                        }
+                })
+        };
+        
   return (
     <>
         <Heading title="Sign In for E-HubVista"/>
