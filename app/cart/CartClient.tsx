@@ -10,12 +10,14 @@ import { formatPrice } from '@/utils/formatPrice';
 import { SafeUser } from '@/types';
 import { useRouter } from 'next/navigation';
 
+interface CartClientProps {
+        currentUser : SafeUser | null;
+}
 
-
+<
 const CartClient: React.FC<CartClientProps> = ({currentUser}) => {
         const { cartProducts, handleClearCart, cartTotalAmount } = useCart();
         const router = useRouter();
-
         if (!cartProducts || cartProducts.length === 0) {
                 return (
                         <div className='flex flex-col items-center'>
@@ -55,7 +57,8 @@ const CartClient: React.FC<CartClientProps> = ({currentUser}) => {
                                                 <span>{formatPrice(cartTotalAmount)}</span>
                                         </div>
                                         <p className='text-slate-500'>Taxes and Shipping calculate at checkout </p>  
-                                         <Button label= {currentUser ? "Proceed to Checkout" : "Login To Checkout" } outline = {currentUser ? false : true}
+
+                                        <Button label= {currentUser ? "Proceed to Checkout" : "Login To Checkout" } outline = {currentUser ? false : true}
                                         onClick={()=> {
                                                 currentUser ? router.push('/checkout') : router.push('/login')
                                         }} />
