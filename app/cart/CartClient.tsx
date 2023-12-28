@@ -60,6 +60,7 @@ const CartClient: React.FC<CartClientProps> = ({currentUser}) => {
                                         onClick={()=> {
                                                 currentUser ? router.push('/checkout') : router.push('/login')
                                         }} />
+                                        
                                         <Link href={'/'} className='items-center gap-1 mt-2 text-slate-500'>
                                                 <MdArrowBack size={24} />
                                                 <span>Continue Shopping</span>
