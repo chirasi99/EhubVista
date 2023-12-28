@@ -7,10 +7,16 @@ import Heading from '@/app/components/Heading';
 import Button from '@/app/components/products/Button';
 import ItemContent from '@/app/cart/ItemContent';
 import { formatPrice } from '@/utils/formatPrice';
+import { SafeUser } from '@/types';
+import { useRouter } from 'next/navigation';
 
+interface CartClientProps {
+        currentUser : SafeUser | null;
+}
 
-function CartClient() {
+const CartClient: React.FC<CartClientProps> = ({currentUser}) => {
         const { cartProducts, handleClearCart, cartTotalAmount } = useCart();
+        const router = useRouter();
         if (!cartProducts || cartProducts.length === 0) {
                 return (
                         <div className='flex flex-col items-center'>
@@ -50,7 +56,10 @@ function CartClient() {
                                                 <span>{formatPrice(cartTotalAmount)}</span>
                                         </div>
                                         <p className='text-slate-500'>Taxes and Shipping calculate at checkout </p>  
-                                        <Button label="Proceed to Checkout" onClick={()=> {}} />
+                                        <Button label= {currentUser ? "Proceed to Checkout" : "Login To Checkout" } outline = {currentUser ? false : true}
+                                        onClick={()=> {
+                                                currentUser ? router.push('/checkout') : router.push('/login')
+                                        }} />
                                         <Link href={'/'} className='items-center gap-1 mt-2 text-slate-500'>
                                                 <MdArrowBack size={24} />
                                                 <span>Continue Shopping</span>
