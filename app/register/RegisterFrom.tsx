@@ -10,9 +10,15 @@ import { AiOutlineGoogle } from 'react-icons/ai';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { signIn } from 'next-auth/react';
+import { SafeUser } from '@/types';
+import { useEffect } from 'react';
 
 
-const RegisterFrom = () => {
+interface RegisterFormProps{
+        currentUser: SafeUser | null;
+}
+
+const RegisterFrom:React.FC<RegisterFormProps> = ({currentUser}) => {
         const [isLoading, setIsLoading] = React.useState(false);
         const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
                 defaultValues: {
@@ -23,6 +29,13 @@ const RegisterFrom = () => {
         });
         
         const router = useRouter(); 
+        useEffect(() => {
+                if(currentUser){
+                        router.push('/cart')
+                        router.refresh();    
+                }
+                
+        },[]);
         
         const onSubmit: SubmitHandler<FieldValues> = (data) => {
                 setIsLoading(true);
@@ -47,10 +60,13 @@ const RegisterFrom = () => {
                 }).catch(()=> toast.error('Something went wrong')).finally(()=> {setIsLoading(false);});
         };
         
+        if(currentUser) return <p className='text-center'>Logged in. Redirecting.....</p>
+                
+        
   return (
     <>
-        <Heading title="Sign up for E-HubVista"/>
-        <Button outline label="Sign up with Google" icon={AiOutlineGoogle} onClick={()=>{}} />
+        <Heading title="Continue with E-HubVista"/>
+        <Button outline label="Continue with Google" icon={AiOutlineGoogle} onClick={()=>{signIn('google')}} />
         <hr className='w-full h-px bg-slate-300'/>
         <Input id="name" label="Name" disabled={isLoading} register={register} errors={errors} required />
         <Input id="email" label="Email" disabled={isLoading} register={register} errors={errors} required />

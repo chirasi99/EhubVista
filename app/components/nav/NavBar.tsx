@@ -3,10 +3,13 @@ import  Container from "../Container";
 import Link from "next/link";
 import CartCount from "@/app/components/nav/CartCount";
 import UserMenu from "@/app/components/nav/UserMenu";
+import { getCurrentUser } from "@/actions/getCurrentUser";
+
 
 const redressed = Redressed({subsets: ['latin'], weight: ['400']})
 
-const NavBar = () => {
+const NavBar =async () => {
+        const currentUser = await getCurrentUser();
     return (
        <div className="sticky top-0 z-30 w-full shadow-sm bg-slate-200">
                 <div className="py-4 border-b-[1px]">
@@ -19,7 +22,7 @@ const NavBar = () => {
                                         <div className="hidden md:block">Search</div>
                                         <div className="flex items-center gap-8 md:gap-12">
                                                 <div><CartCount /></div>
-                                                <div><UserMenu /></div>     
+                                                <div><UserMenu currentUser={currentUser}/></div>     
                                         </div>
                                 </div>
                         </Container>
