@@ -60,3 +60,15 @@ Ehubvista is a full-stack e-commerce web application built with cutting-edge tec
 - Node.js and npm installed
 - MongoDB installed and running
 - Stripe account for payment processing
+
+![home ](https://github.com/chirasi99/EhubVista/assets/87434721/2da09dab-2f57-47dd-9456-51e5cb8d6756)
+
+![item](https://github.com/chirasi99/EhubVista/assets/87434721/6a06d1c8-7e25-4470-b3f7-2d35cb1eb82f)
+
+![chekout](https://github.com/chirasi99/EhubVista/assets/87434721/a69c00a1-8a10-49d8-ad69-6fc1e4f28609)
+
+![Signup](https://github.com/chirasi99/EhubVista/assets/87434721/f2b945b7-409b-4713-92d0-186cfa4f1218)
+
+![login](https://github.com/chirasi99/EhubVista/assets/87434721/3877a51a-93e9-476e-8831-7343098c4909)
+
+![paymentinvoice](https://github.com/chirasi99/EhubVista/assets/87434721/15fa3cd2-5b2b-4d06-9d98-53c82ead870b)
